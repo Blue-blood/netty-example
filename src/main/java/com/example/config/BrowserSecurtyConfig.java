@@ -1,7 +1,6 @@
 package com.example.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,7 +15,6 @@ import javax.annotation.Resource;
  * @Author: wangdi
  * @Date: 2020/6/10 10:41
  */
-@Configuration
 @EnableWebSecurity
 public class BrowserSecurtyConfig extends WebSecurityConfigurerAdapter {
 
@@ -30,8 +28,11 @@ public class BrowserSecurtyConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("---------------------------");
-        http.formLogin().and().authorizeRequests()
-        .anyRequest().authenticated().and().csrf().disable();
+        http.formLogin()
+                .and().authorizeRequests()
+                .antMatchers("/hello/*").permitAll()//允许这个路径通过
+                .anyRequest().authenticated()//剩下的任何路径都校验
+                .and().csrf().disable();//取消跨域
     }
 
 

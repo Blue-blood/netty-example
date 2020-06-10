@@ -19,6 +19,15 @@ import java.util.List;
 @RequestMapping("/hello")
 public class TesController {
 
+    @GetMapping("/world")
+    public testVo world(){
+        testVo vo = new testVo();
+        vo.setAge(18);
+        vo.setName("小黑");
+        vo.setSex("男");
+        return vo;
+    }
+
     @GetMapping("/1")
     public void sssssss(){
         System.out.println("--------------");
