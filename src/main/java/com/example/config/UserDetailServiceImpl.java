@@ -23,7 +23,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String pw = passwordEncoder.encode("123455");
+        String pw = passwordEncoder.encode("123456");
         User user = new User("user",pw, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
         System.out.println(pw);
         return user;

@@ -30,7 +30,7 @@ public class BrowserSecurtyConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("---------------------------");
-        http.userDetailsService(userDetailsService).formLogin().and().authorizeRequests()
+        http.formLogin().and().authorizeRequests()
         .anyRequest().authenticated().and().csrf().disable();
     }
 
