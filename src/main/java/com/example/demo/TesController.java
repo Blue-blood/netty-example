@@ -1,9 +1,7 @@
 package com.example.demo;
 
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
@@ -25,6 +23,15 @@ public class TesController {
         vo.setAge(18);
         vo.setName("小黑");
         vo.setSex("男");
+        return vo;
+    }
+
+    @PostMapping("/world2")
+    public testVo world2(@RequestBody testVo vo){
+        System.out.println(vo);
+        vo.setName("張三");
+        vo.setAge(19);
+        vo.setSex("女");
         return vo;
     }
 
