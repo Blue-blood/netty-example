@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.netty.echo.EchoServerReactor;
+import com.example.netty.netty.protobuf.ProtoServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,6 +15,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
 //        DiscardServer server = new DiscardServer();
 //        server.test();
-        new Thread(new EchoServerReactor()).start();
+        int port = 6666;
+        new ProtoServer(port).runServer();
     }
 }
