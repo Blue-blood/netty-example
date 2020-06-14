@@ -26,6 +26,7 @@ public class ProtoClient {
     }
     public void runClient(){
         EventLoopGroup workLoopGroup = new NioEventLoopGroup();
+        Channel channel = null;
         try {
             //1设置反应器线程组
             bootstrap.group(workLoopGroup);
@@ -49,20 +50,22 @@ public class ProtoClient {
             });
             //阻塞 直到连接成功
             channelFuture.sync();
-            Channel channel =  channelFuture.channel();
+            channel =  channelFuture.channel();
 
             //发送proto对象
-            for (int i = 1; i < 100000; i++) {
+            for (int i = 1; i < 10; i++) {
                 ProtoDemo.Student student =  build(i,i+".com邮箱");
                 channel.writeAndFlush(student);
                 System.out.println("发送报文数:"+i);
             }
             channel.flush();
-            Thread.sleep(Integer.MAX_VALUE);
         }catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
             workLoopGroup.shutdownGracefully();
+            if (channel!=null){
+                channel.close();
+            }
         }
     }
 
@@ -74,9 +77,7 @@ public class ProtoClient {
     }
 
     public static void main(String[] args) {
-        ProtoClient client  = new ProtoClient(6666,"122.51.235.98");
-
-//        ProtoClient client  = new ProtoClient(6666,"127.0.0.1");
-        client.runClient();
+            ProtoClient client  = new ProtoClient(6666,"122.51.235.98");
+            client.runClient();
     }
 }
