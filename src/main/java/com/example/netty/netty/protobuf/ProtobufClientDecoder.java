@@ -9,7 +9,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @author Mrdi
  * @date 2020/6/14
  */
-public class ProtobufBusinessDecoder extends ChannelInboundHandlerAdapter {
+public class ProtobufClientDecoder extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ProtoDemo.Student student = (ProtoDemo.Student) msg;
@@ -18,11 +18,6 @@ public class ProtobufBusinessDecoder extends ChannelInboundHandlerAdapter {
         System.out.print("     email="+student.getEmail());
         System.out.println("");
 
-        ProtoDemo.Student.Builder build = ProtoDemo.Student.newBuilder();
-        build.setId(666);
-        build.setEmail("我收到了");
-        ProtoDemo.Student st =build.build();
-        ctx.channel().writeAndFlush(st);
         super.channelRead(ctx, msg);
     }
 

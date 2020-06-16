@@ -4,7 +4,7 @@ package com.example;
 option java_package = "com.example";
 //生成的java文件名
 option java_outer_classname = "ProtoDemo";
-
+//option java_multiple_files =true;
 message Student {
   uint32 id = 1;
   string email = 2;
