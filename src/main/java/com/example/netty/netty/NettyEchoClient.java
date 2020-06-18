@@ -36,7 +36,9 @@ public class NettyEchoClient {
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
-                    socketChannel.pipeline().addLast(NettyEchoClientHandler.INSTANCE);
+                    socketChannel.pipeline()
+                            .addLast(TimeDecoder.INSTANCE)
+                            .addLast(NettyEchoClientHandler.INSTANCE);
                 }
             });
             ChannelFuture channelFuture =  bootstrap.connect();
@@ -77,7 +79,8 @@ public class NettyEchoClient {
     }
 
     public static void main(String[] args) {
-        NettyEchoClient client  = new NettyEchoClient(6666,"127.0.0.1");
+//        NettyEchoClient client  = new NettyEchoClient(6666,"127.0.0.1");
+        NettyEchoClient client  = new NettyEchoClient(6666,"122.51.235.98");
         client.runClient();
     }
 }

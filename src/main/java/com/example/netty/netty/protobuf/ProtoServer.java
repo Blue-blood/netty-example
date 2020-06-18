@@ -55,6 +55,7 @@ public class ProtoServer {
             bootstrap.localAddress(serverPort);
             //4设置通道的参数
             bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
+            bootstrap.option(ChannelOption.SO_BACKLOG, 128);
             bootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
             //6开始绑定服务器
             //通过调用sync同步方法阻塞，直到绑定成功

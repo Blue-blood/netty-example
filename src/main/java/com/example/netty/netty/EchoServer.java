@@ -35,7 +35,10 @@ public class EchoServer {
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
                     //流水线管理子通道中的handler处理器
                     //向子通道流水线  添加一个 处理器
-                    socketChannel.pipeline().addLast(new NettyEchoHandler());
+                    socketChannel.pipeline()
+                            .addLast(new TimeEncoder())
+                            .addLast(new NettyEchoHandler())
+                    ;
                 }
             });
             //3设置监听端口

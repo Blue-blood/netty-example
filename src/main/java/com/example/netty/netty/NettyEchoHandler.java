@@ -1,12 +1,7 @@
 package com.example.netty.netty;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.ReferenceCountUtil;
-import io.netty.util.concurrent.EventExecutorGroup;
+import io.netty.channel.*;
 
 /**
  * @author Mrdi
@@ -16,6 +11,23 @@ import io.netty.util.concurrent.EventExecutorGroup;
 @ChannelHandler.Sharable
 public class NettyEchoHandler extends ChannelInboundHandlerAdapter {
     static final NettyEchoHandler INSTANCE = new NettyEchoHandler();
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+//        long time  = System.currentTimeMillis() / 1000L + 2208988800L;
+//        ByteBuf byteBuf = ctx.alloc().buffer(4);
+//        byteBuf.writeInt((int) time);
+        ChannelFuture f = ctx.writeAndFlush(new UnitTime());
+        //f.addListener(ChannelFutureListener.CLOSE);等价于下面的关闭上下文
+        f.addListener(new ChannelFutureListener() {
+            @Override
+            public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                assert f==channelFuture;
+                ctx.close();
+            }
+        });
+    }
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf in = (ByteBuf) msg;

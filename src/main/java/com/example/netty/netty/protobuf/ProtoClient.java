@@ -65,7 +65,7 @@ public class ProtoClient {
                 System.out.println("发送报文数:"+i);
             }
             channel.flush();
-            Thread.sleep(Integer.MAX_VALUE);
+            System.out.println(channel.isOpen());
         }catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
@@ -84,8 +84,13 @@ public class ProtoClient {
     }
 
     public static void main(String[] args) {
+        for (int i = 0; i < 100; i++) {
+            new Thread(new Client()).start();
 //            ProtoClient client  = new ProtoClient(6666,"122.51.235.98");
-        ProtoClient client  = new ProtoClient(6666,"127.0.0.1");
-            client.runClient();
+//            client.runClient();
+            System.out.println("-----");
+        }
+
+//        ProtoClient client  = new ProtoClient(6666,"127.0.0.1");
     }
 }
