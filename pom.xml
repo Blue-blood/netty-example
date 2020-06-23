@@ -22,6 +22,7 @@
 
     <dependencies>
 
+        <!--protobuf相关依赖-->
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-netty</artifactId>
@@ -91,6 +92,7 @@
     </dependencies>
 
     <build>
+        <!--protobuf插件-->
         <extensions>
             <extension>
                 <groupId>kr.motd.maven</groupId>
