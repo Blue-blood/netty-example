@@ -43,10 +43,11 @@ public class ProtoServer {
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
                     //流水线管理子通道中的handler处理器
                     //向子通道流水线  添加一个 处理器
-                    socketChannel.pipeline().addLast(new ProtobufVarint32FrameDecoder())
-                    .addLast(new ProtobufDecoder(ProtoDemo.Student.getDefaultInstance()))
+                    socketChannel.pipeline()
+                            .addLast(new ProtobufVarint32FrameDecoder())
+                            .addLast(new ProtobufDecoder(ProtoDemo.Student.getDefaultInstance()))
                             .addLast(new ProtobufVarint32LengthFieldPrepender())
-                    .addLast(new ProtobufEncoder())
+                            .addLast(new ProtobufEncoder())
                     .addLast(new ProtobufBusinessDecoder());
 
                 }

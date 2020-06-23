@@ -9,7 +9,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @Author: MrDi
  * @Date: 2020/6/18 9:50
  */
-@ChannelHandler.Sharable
+@ChannelHandler.Sharable//表示多个ChannelPipeline可以共享同一个ChannelHandler。
 public class SimpleChatClientHandler extends SimpleChannelInboundHandler<String> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {

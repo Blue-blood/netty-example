@@ -1,0 +1,12 @@
+//创建服务端秘钥仓库
+keytool -genkey -alias nettyServer -keysize 2048 -validity 365 -keyalg RSA -dname "CN=localhost" -keypass defaultPass -storepass defaultPass -keystore nettyServer.jks
+//从秘钥仓库导出公钥证书
+keytool -export -alias nettyServer -keystore nettyServer.jks -storepass defaultPass -file nettyServer.cer
+//创建客户端秘钥仓库
+keytool -genkey -alias nettyClient -keysize 2048 -validity 365 -keyalg RSA -dname "CN=localhost" -keypass defaultPass -storepass defaultPass -keystore nettyClient.jks
+//从秘钥仓库导出公钥证书
+keytool -export -alias nettyClient -keystore nettyClient.jks -storepass defaultPass -file nettyClient.cer
+//将服务端公钥证书作为信任证书导入客户端秘钥仓库中
+keytool -import -trustcacerts -alias nettyServer -file nettyServer.cer -storepass defaultPass -keystore nettyClient.jks
+//将客户端端公钥证书作为信任证书导入服务端秘钥仓库中
+keytool -import -trustcacerts -alias nettyClient -file nettyClient.cer -storepass defaultPass -keystore nettyServer.jks
