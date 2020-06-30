@@ -15,6 +15,8 @@ import java.nio.charset.Charset;
  * @Date: 2020/6/22 9:34
  */
 public class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
+
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, FullHttpRequest fullHttpRequest) throws Exception {
         readRequest(fullHttpRequest);
@@ -31,6 +33,8 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpReque
                 sendMsg = "<h3>default</h3>";
                 break;
         }
+
+
         wirteResponse(channelHandlerContext,sendMsg);
     }
 
@@ -44,13 +48,13 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpReque
 
 
     private void readRequest(FullHttpRequest fullHttpRequest) {
-        System.out.println("请求行------");
-        System.out.println(fullHttpRequest.method()+ " "+fullHttpRequest.uri()+ " "+ fullHttpRequest.protocolVersion());
-        System.out.println("请求头---");
-        for (String name :fullHttpRequest.headers().names()){
-            System.out.println(name+":"+fullHttpRequest.headers().get(name));
-        }
-        System.out.println("消息体");
-        System.out.println(fullHttpRequest.content().toString(Charset.defaultCharset()));
+//        System.out.println("请求行------");
+//        System.out.println(fullHttpRequest.method()+ " "+fullHttpRequest.uri()+ " "+ fullHttpRequest.protocolVersion());
+//        System.out.println("请求头---");
+//        for (String name :fullHttpRequest.headers().names()){
+//            System.out.println(name+":"+fullHttpRequest.headers().get(name));
+//        }
+//        System.out.println("消息体");
+//        System.out.println(fullHttpRequest.content().toString(Charset.defaultCharset()));
     }
 }
